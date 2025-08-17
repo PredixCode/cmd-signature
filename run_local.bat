@@ -1,0 +1,1 @@
+python .\display.py --input .\ascii-sign.json --fit --speed 4

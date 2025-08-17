@@ -128,6 +128,7 @@ def main():
     parser = argparse.ArgumentParser(description="Play a colored ASCII JSON video in your terminal.")
     parser.add_argument("--input", default="out.json", help="Input JSON file (default: out.json)")
     parser.add_argument("--loop", action="store_true", help="Loop playback")
+    parser.add_argument("--speed", default=1.0, help="Playback speed")
     parser.add_argument("--scale", type=float, default=1.0, help="Scale factor (<1 downscale, >1 upscale). Ignored if --fit is used.")
     parser.add_argument("--fit", action="store_true", help="Automatically scale to fit the current terminal")
     parser.add_argument("--no-clear", action="store_true", help="Do not clear the screen at start")
@@ -148,7 +149,12 @@ def main():
     width = int(data.get("width", 0))
     height = int(data.get("height", 0))
     use_fps = float(data.get("fps", 30.0)) or 30.0
-    frame_dt = 1.0 / use_fps
+    try:
+        speed = 1 / float(args.speed)
+    except:
+        print("Can't use speed argument. Make sure it is a double (e.g. 1.0)")
+        sys.exit(1)
+    frame_dt = speed / use_fps
 
     out = sys.stdout
     out.write(HIDE_CURSOR)
