@@ -1,1 +1,1 @@
-python .\signature\display.py --input .\signature\ascii-sign.json --fit
+python .\cmd-signature\display.py --input .\cmd-signature\ascii-sign.json --fit
